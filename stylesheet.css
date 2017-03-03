@@ -1,0 +1,139 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: "Raleway", sans-serif;
+    margin-bottom: 40px;
+}
+section {
+    font-size: 17px;
+}
+.topImage {
+    margin: 0;
+    padding: 0;
+    align-self: center;
+    max-width: 100%;
+    height: auto;
+}
+.rule {
+    width: 30%;
+    margin: 25px auto 25px auto;
+    clear: both;
+}
+.allGames {
+    margin: 20px 5% 20px 5%;
+}
+.tableOfGames {
+    padding: 10px 5% 10px 5%;
+    width: 50%;
+    float: left;
+    position: relative;
+    box-sizing: border-box;
+}
+.gameImg {
+    position: static;
+    float: left;
+    padding-right: 25px;
+}
+.gameImg img {
+    margin-top: 25px;
+    width: 100px;
+    height: 127px;
+    border: 1px solid #021a40;
+    box-shadow: 5px 5px 2px #888888;
+}
+.gameImg img:hover {
+    box-shadow: 10px 10px 5px #888888;
+}
+.game {
+    position: static;
+    text-align: left;
+    padding: 10px 0 10px 0;
+    margin-left: 15%;
+    width: 60%;
+}
+.gameTitle {
+    position: static;
+    text-align: left;
+    padding: 10px 0 10px 0;
+    margin-left: 15%;
+    width: 70%;
+    font-weight: bold;
+    font-size: 26px;
+}
+.gamePrice {
+    position: static;
+    float: right;
+    text-align: right;
+    font-weight: bold;
+    font-size: 30px;
+}
+.addToCart {
+    position: static;
+    float: right;
+    margin-top: 15px;
+    width: 90px;    
+}
+.topImage {
+    margin: 0;
+    padding: 0;
+    align-self: center;
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    overflow: hidden;
+}
+nav {
+    background-color: #393939;
+    border-bottom: 0;
+    position: relative;
+}
+nav > h1 {
+    margin-left: 35%;
+    margin-right: 35%;
+    width: 30%;
+    text-align: center;
+    font-weight: 700;
+    color: #FFFFFF;
+    font-size: 20pt;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    letter-spacing: 2px;
+}
+nav > h1 > a {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+nav > ul {
+    float: right;
+    padding-right: 14px;
+    text-align: right;
+}
+nav > ul > li {
+    position: static;
+    float: left;
+    list-style: none;
+    font-weight: 600;
+    font-size: 14pt;
+    padding: 0;
+}
+nav > ul > li a {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    padding: 14px 16px;
+    color: #FFFFFF
+
+}
+nav > ul > li a:hover{
+    background-color: #FFFFFF;
+    color: #393939;
+    margin-bottom: 0;
+}
+nav > ul > li a:active{
+    background-color: #FCFCFC;
+    color: #9099A2;
+    margin-bottom: 0;
+}
