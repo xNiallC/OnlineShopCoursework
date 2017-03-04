@@ -17,7 +17,10 @@
         CurtisGames<span style="font-size: 10pt;">.co.uk</span>
     </h1>
     <ul>
-        <li><a href="#Games">Games</a></li>
+        <li><a href="cart.php">Cart</a></li>
+    </ul>
+    <ul>
+        <li><a href="index.php">Games</a></li>
     </ul>
     <div style="clear:both"></div>
 </nav>
@@ -52,24 +55,25 @@ $result= $connect->query($gamesTable);
 if(isset($_GET['action']) && $_GET['action'] == "add") {
 
   // Set Game ID = value of the id from page
-  $gameID = intval($_GET['id']);
+  $gameID = $_GET['id'];
 
   // Check if session with cart and the game exists
   if (isset($_SESSION['cart'][$gameID])) {
     // Add one to the cart
-    $_SESSION['cart'][$gameID]['quantity']++;
+    $_SESSION['cart'][$gameID]['quantity'] ++;
   }
   else {
 
     // Select game from ID, then query database
     $selectGame="SELECT * FROM Games WHERE gameID={$gameID}";
-    $query_stock=mysql_query($selectGame);
+    $query_stock=$connect->query($selectGame);
 
-    $row_stock=mysql_fetch_array($query_stock);
+    $row_stock=$query_stock->fetch_array();
 
     // With our new session, get the price from the game ID, add it to the session and add one to the cart
     $_SESSION['cart'][$row_stock['gameID']]=array(
-      "quantity" => 1, "price" => $row_stock['price']
+      "quantity" => 1,
+      "price" => $row_stock['price']
     );
   }
 }
@@ -94,9 +98,9 @@ if(isset($_GET['action']) && $_GET['action'] == "add") {
 
         <div class="gameTitle"><?php echo $row["name"] ?></div>
 
-        <div class="gamePrice">£<?php echo $row["price"] ?><br />
-          <!-- <input type="submit" value="Add to Cart" class="addToCart" href="index.php?page=index&action=add&id=<?php echo $row['gameID'] ?>"> -->
-          <a href="index.php?page=index&action=add&id=<?php echo $row['gameID'] ?>">Add to cart</a>
+        <div class="gamePrice">
+          £<?php echo $row["price"] ?><br />
+          <a href="index.php?page=index&action=add&id=<?php echo $row['gameID'] ?>" class="addToCartLink">Add to cart</a>
         </div>
 
         <div class="game"><?php echo $row["description"] ?></div>
@@ -121,6 +125,20 @@ if(isset($_GET['action']) && $_GET['action'] == "add") {
 
 
     <?php } ?>
+
+    <?php
+    if (!empty($_GET['act'])) {
+      session_destroy();
+    } else { ?>
+    <form action="index.php" method="get">
+      <input type="hidden" name="act" value="run" />
+      <input type="submit" value="Clear PHP Session" />
+    </form>
+    <?php }
+    ?>
+    <?php
+
+     ?>
 </section>
 
 <?php

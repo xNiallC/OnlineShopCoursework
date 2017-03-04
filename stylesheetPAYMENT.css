@@ -109,3 +109,8 @@ nav > ul > li a:active{
 input {
     padding: 5px;
 }
+.rule {
+    width: 30%;
+    margin: 25px auto 25px auto;
+    clear: both;
+}

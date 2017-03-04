@@ -31,6 +31,57 @@ section {
     position: relative;
     box-sizing: border-box;
 }
+table {
+    width: 100%
+}
+td {
+    width: 33.33%;
+}
+.cartGames {
+    padding: 10px 5% 10px 5%;
+    width: 100%;
+    float: left;
+    position: relative;
+    box-sizing: border-box;
+}
+.cartImg {
+    padding-right: 25px;
+}
+.cartImg img {
+    position: static;
+    transform: translateY(-20%);
+    float: left;
+    margin-top: 25px;
+    width: 50px;
+    height: 64px;
+    border: 1px solid #021a40;
+    box-shadow: 3px 3px 2px #888888;
+}
+.cartPrice {
+    padding-top: 10px;
+    position: static;
+    float: left;
+    text-align: right;
+    font-weight: bold;
+    font-size: 15px;
+}
+.quantityInput {
+    padding-right: 40px;
+    width: 40px;
+    text-align: left;
+    float: right;
+    transform: translateY(-250%);
+}
+.totalPriceArea {
+    text-align: center;
+}
+.updateCart {
+    width: 15%;
+    margin: 0 auto;
+}
+.submitCartUpdate {
+    width: 100%;
+}
 .gameImg {
     position: static;
     float: left;
@@ -73,7 +124,16 @@ section {
     position: static;
     float: right;
     margin-top: 15px;
-    width: 90px;    
+    width: 90px;
+}
+.proceedToPayment {
+    font-style: italic;
+    color: black;
+    font-weight: 400;
+    text-decoration: none;
+}
+.proceedToPayment:hover {
+    text-decoration: underline;
 }
 .topImage {
     margin: 0;
@@ -136,4 +196,26 @@ nav > ul > li a:active{
     background-color: #FCFCFC;
     color: #9099A2;
     margin-bottom: 0;
+}
+.emptyCart {
+  font-weight: 600;
+  width: 100%;
+  text-align: center;
+  padding-top: 25px;
+}
+.addToCartLink {
+  text-decoration: none;
+  color: black;
+  font-weight: normal;
+  font-style: italic;
+  font-size: 17px;
+}
+.addToCartLink:hover {
+  text-decoration: underline;
+}
+.addToCartLink:active {
+  text-decoration: underline;
+}
+.gamePricePrice {
+  padding-bottom: 10px;
 }
