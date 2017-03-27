@@ -24,6 +24,9 @@ section {
 .allGames {
     margin: 20px 5% 20px 5%;
 }
+.allGamesProduct {
+    margin: 20px 15% 20px 15%;
+}
 .tableOfGames {
     padding: 10px 5% 10px 5%;
     width: 50%;
@@ -87,6 +90,11 @@ td {
     float: left;
     padding-right: 25px;
 }
+.gameImgProduct {
+    position: static;
+    float: left;
+    padding-right: 25px;
+}
 .gameImg img {
     margin-top: 25px;
     width: 100px;
@@ -94,8 +102,15 @@ td {
     border: 1px solid #021a40;
     box-shadow: 5px 5px 2px #888888;
 }
+.gameImgProduct img {
+    margin-top: 25px;
+    width: 250px;
+    height: 310px;
+    border: 1px solid #021a40;
+    box-shadow: 10px 10px 4px #888888;
+}
 .gameImg img:hover {
-    box-shadow: 10px 10px 5px #888888;
+    box-shadow: 7px 7px 4px #888888;
 }
 .game {
     position: static;
@@ -112,6 +127,22 @@ td {
     width: 70%;
     font-weight: bold;
     font-size: 26px;
+}
+.gameTitle > a {
+    text-decoration: none;
+    color: black;
+}
+.gameTitle > a:hover {
+    font-style: italic;
+}
+.gameTitleProduct {
+    position: static;
+    text-align: left;
+    padding: 10px 0 10px 0;
+    margin-left: 15%;
+    width: 70%;
+    font-weight: bold;
+    font-size: 35px;
 }
 .gamePrice {
     position: static;
@@ -143,6 +174,8 @@ td {
     height: auto;
     max-height: 300px;
     overflow: hidden;
+    border-style: 3px solid #d3d3d3;
+    border-bottom: solid;
 }
 nav {
     background-color: #393939;
@@ -208,7 +241,7 @@ nav > ul > li a:active{
   color: black;
   font-weight: normal;
   font-style: italic;
-  font-size: 17px;
+  font-size: 15px;
 }
 .addToCartLink:hover {
   text-decoration: underline;
@@ -216,6 +249,7 @@ nav > ul > li a:active{
 .addToCartLink:active {
   text-decoration: underline;
 }
-.gamePricePrice {
-  padding-bottom: 10px;
+.sortForm {
+  width: 15%;
+  margin-left: 5%;
 }

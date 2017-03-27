@@ -40,8 +40,30 @@ $userName="c1623580";
 $password="Holiday01";
 $database="c1623580";
 
-$gamesTable="SELECT * FROM Games";
+$gamesTable = "HUGE MEMES";
 
+// Check if ordering is set
+if(isset($_GET['order'])) {
+  $productOrder = $_GET['order'];
+  if( $productOrder == 'a2z') {
+    $gamesTable="SELECT * FROM Games ORDER BY name ASC";
+  }
+  else if( $productOrder == 'z2a') {
+    $gamesTable="SELECT * FROM Games ORDER BY name DESC";
+  }
+  else if( $productOrder == 'price') {
+    $gamesTable="SELECT * FROM Games ORDER BY price ASC";
+  }
+  else if( $productOrder == 'priceDesc') {
+    $gamesTable="SELECT * FROM Games ORDER BY price DESC";
+  }
+  else {
+    $gamesTable="SELECT * FROM Games";
+  }
+}
+else {
+  $gamesTable="SELECT * FROM Games";
+}
 // Open MySQL connection, get needed info
 
 $connect = new mysqli($serverName, $userName, $password, $database);
@@ -52,6 +74,7 @@ $result= $connect->query($gamesTable);
 
 // Next we deal with adding to the cart
 
+// Check if set and action
 if(isset($_GET['action']) && $_GET['action'] == "add") {
 
   // Set Game ID = value of the id from page
@@ -83,7 +106,33 @@ if(isset($_GET['action']) && $_GET['action'] == "add") {
 </code>
 
 <section id="Games" class="allGames">
+  <form method="get" action="index.php" class="sortForm">
+    <select name="order">
+      <option value="none" name="none">
+        None
+      </option>
+      <option value="a2z" name="a2z">
+        Name Ascending
+      </option>
+      <option value="z2a" name="a2z">
+        Name Descending
+      </option>
+      <option value="price" name="price">
+        Price Ascending
+      </option>
+      <option value="priceDesc" name="priceDesc">
+        Price Descending
+      </option>
+    </select>
+    <input type="submit" value="Sort" />
+  </form>
 <?php
+    if(isset($_GET['game'])) {
+      echo $_GET['game']." added to cart.";
+    }
+    ?>
+    <br />
+    <?php
     $count = 0;
     // PHP while loop that serves HTML and CSS for each database row, with an if to ensure every 2nd
     // game starts a new row.
@@ -92,15 +141,15 @@ if(isset($_GET['action']) && $_GET['action'] == "add") {
 
         <!-- Each element from the database has its own div for styling -->
 
-        <div class="gameImg"><img src="<?php echo $row["image"] ?>"></div>
+        <div class="gameImg"><img src="<?php echo $row["image"] ?>" href="productpage.php?id=<?php echo $row['gameID'] ?>"></div>
 
         <br/>
 
-        <div class="gameTitle"><?php echo $row["name"] ?></div>
+        <div class="gameTitle"><a href="productpage.php?id=<?php echo $row['gameID'] ?>"><?php echo $row["name"] ?></a></div>
 
         <div class="gamePrice">
           £<?php echo $row["price"] ?><br />
-          <a href="index.php?page=index&action=add&id=<?php echo $row['gameID'] ?>" class="addToCartLink">Add to cart</a>
+          <a id="addItemToCartID" href="index.php?page=index&action=add&id=<?php echo $row['gameID'] ?>&game=<?php echo $row["name"] ?>" class="addToCartLink">- Add to cart -</a>
         </div>
 
         <div class="game"><?php echo $row["description"] ?></div>
@@ -118,6 +167,7 @@ if(isset($_GET['action']) && $_GET['action'] == "add") {
     <!-- If statement to work out every 2nd element via modulo -->
 
     <?php
+        // Simple way to split rows up
         if($count % 2 == 0) {
         echo '<hr class="rule" />';
         }
@@ -125,25 +175,10 @@ if(isset($_GET['action']) && $_GET['action'] == "add") {
 
 
     <?php } ?>
-
-    <?php
-    if (!empty($_GET['act'])) {
-      session_destroy();
-    } else { ?>
-    <form action="index.php" method="get">
-      <input type="hidden" name="act" value="run" />
-      <input type="submit" value="Clear PHP Session" />
-    </form>
-    <?php }
-    ?>
-    <?php
-
-     ?>
 </section>
 
 <?php
 mysqli_close($connect);
-print_r($_SESSION);
 ?>
 
 </body>

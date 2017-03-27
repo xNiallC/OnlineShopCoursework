@@ -97,7 +97,7 @@
     <table>
     <tr>
     <?php
-    // Calculate price
+    // Calculate price from our prices in session
     while($row=$query->fetch_assoc()){
       $totalPrice += $_SESSION['cart'][$row['gameID']]['quantity']*$row['price'];
     ?>
@@ -108,10 +108,12 @@
           <br />£<?php echo $row["price"] ?>
         </div>
         <div class="quantityInput">
+          <!-- Get game and quantity from PHP session -->
           <input type="text" name="quantity[<?php echo $row['gameID'] ?>]" size="5" value="<?php echo $_SESSION['cart'][$row['gameID']]['quantity'] ?>" />
         </div>
       </td>
     <?php
+    // Split 3 games per row
     $count += 1;
     if($count % 3 == 0) {
     echo '</tr>';
@@ -140,5 +142,6 @@
     <?php echo "Your cart is empty"?>
   </p>
 <?php }
+  // Keep the price in session
    $_SESSION['price'] = $totalPrice;
 ?>
