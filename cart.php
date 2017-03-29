@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>Curtis Games</title>
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="fonts/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head>
 
@@ -25,7 +26,46 @@
 </nav>
 
 <header>
-    <img src="img/mario.jpg" class="topImage"/>
+    <img src="img/franklin.jpg" class="topImage fade" />
+    <img src="img/mario.jpg" class="topImage fade"/>
+    <img src="img/fez.png" class="topImage fade"  />
+    <img src="img/minecraft.png" class="topImage fade" />
+    <img src="img/rl.jpg" class="topImage fade" />
+    <img src="img/wow.jpg" class="topImage fade" />
+    <img src="img/zelda.jpg" class="topImage fade" />
+    <img src="img/uncharted.jpg" class="topImage fade" />
+    <img src="img/fifa.jpg" class="topImage fade" />
+    <img src="img/r&c.jpg" class="topImage fade" />
+    <img src="img/ff15.jpg" class="topImage fade" />
+    <img src="img/hzd.jpg" class="topImage fade" />
+
+    <script>
+    // Automatic slideshow, learnt from https://www.w3schools.com/w3css/w3css_slideshow.asp. Thanks W3Schools ! :D
+
+    // set initial slideshow index, and get images
+    var slideIndex = 0;
+    slideshow();
+
+    function slideshow() {
+      var i;
+      // Get images from their class name
+      // iterate through images
+      var images = document.getElementsByClassName('topImage');
+
+      for (i = 0; i < images.length; i++) {
+        images[i].style.display = 'none';
+      }
+      slideIndex++;
+      // Once we have looped through all images, reset the number
+      if (slideIndex > images.length) {
+        slideIndex = 1
+      }
+      // display as block
+      images[slideIndex-1].style.display = 'block';
+      // change image every 4 seconds
+      setTimeout(slideshow, 10000);
+    }
+    </script>
 </header>
 
 <?php
@@ -71,6 +111,13 @@
 
    // If statement to check if session exists
    if(isset($_SESSION['cart'])) {
+    if(empty($_SESSION['cart'])) {
+        ?>
+        <div class='emptyCart'>
+          Your cart is empty.<br />):
+        </div>
+        <?php
+    }
     $getGame = "SELECT * FROM Games WHERE gameID IN(";
 
     // MySQL select for only the products in the cart
@@ -113,6 +160,9 @@
         </div>
       </td>
     <?php
+    if( $totalPrice == 0) {
+      echo $totalPrice;
+    }
     // Split 3 games per row
     $count += 1;
     if($count % 3 == 0) {
@@ -136,12 +186,8 @@
       <a href="paymentform.php" class="proceedToPayment">- Proceed to Payment -</a>
     </div>
     <?php
-  } else {
-?>
-  <p class="emptyCart">
-    <?php echo "Your cart is empty"?>
-  </p>
-<?php }
+  }
   // Keep the price in session
    $_SESSION['price'] = $totalPrice;
+
 ?>

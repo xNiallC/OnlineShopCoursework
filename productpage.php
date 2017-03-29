@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <title>Curtis Games</title>
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="fonts/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head>
 
@@ -24,10 +25,6 @@
     </ul>
     <div style="clear:both"></div>
 </nav>
-
-<header>
-    <img src="img/mario.jpg" class="topImage"/>
-</header>
 
 <code>
   <?php
@@ -49,6 +46,34 @@ $connect = new mysqli($serverName, $userName, $password, $database);
 
 $result= $connect->query($gamesTable);
 
+// Next we deal with adding to the cart
+
+// Check if set and action
+if(isset($_GET['action']) && $_GET['action'] == "add") {
+
+  // Set Game ID = value of the id from page
+  $gameID = $_GET['id'];
+
+  // Check if session with cart and the game exists
+  if (isset($_SESSION['cart'][$gameID])) {
+    // Add one to the cart
+    $_SESSION['cart'][$gameID]['quantity'] ++;
+  }
+  else {
+
+    // Select game from ID, then query database
+    $selectGame="SELECT * FROM Games WHERE gameID={$gameID}";
+    $query_stock=$connect->query($selectGame);
+
+    $row_stock=$query_stock->fetch_array();
+
+    // With our new session, get the price from the game ID, add it to the session and add one to the cart
+    $_SESSION['cart'][$row_stock['gameID']]=array(
+      "quantity" => 1,
+      "price" => $row_stock['price']
+    );
+  }
+}
 
 // Get ID from URL using get
 $gameID = $_GET['id'];
@@ -66,6 +91,11 @@ $gameRow=$query->fetch_array();
 
 </code>
 
+<header>
+  <?php $gameName = $gameRow['screenshot'] ?>
+  <img src="img/<?php echo $gameName ?>" class="topImageProduct" />
+</header>
+
 <body>
   <section id="Games" class="allGamesProduct">
       <?php
@@ -73,9 +103,23 @@ $gameRow=$query->fetch_array();
         $gameName = $gameRow['name'];
         $gamePrice = $gameRow['price'];
         $gameImage = $gameRow['image'];
-        $gameDescription = $gameRow['description'];
+        $gameDescription = $gameRow['detaileddesc'];
       ?>
       <div class="gameImgProduct"><img src="<?php echo $gameImage ?>"></div>
-      <div class="gameTitle"><?php echo $gameName?></div>
+      <div class="gameTitleProduct"><?php echo $gameName?></div>
+      <div class="gamePriceProduct">£<?php echo $gamePrice?></div>
+      <hr class="ruleProduct" />
+      <div class="gameDescriptionProduct"><?php echo $gameDescription?></div>
+      <div class="inCart">
+        <?php
+        if(isset($_GET['action'])) {
+          echo "Added to cart! - ";
+        }
+        if(isset($_SESSION['cart'][$gameID]['quantity'])) {
+          ?>Number already in cart: <?php echo $_SESSION['cart'][$gameID]['quantity'];
+        }?>
+      </div>
+      <div class="addToCartProduct"><a href="productpage.php?page=index&action=add&id=<?php echo $gameID?>">
+        <i class="fa fa-cart-plus" aria-hidden="true"></i> Add to Cart</a></div>
   </section>
 </body>

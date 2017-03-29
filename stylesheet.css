@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 body {
     font-family: "Raleway", sans-serif;
@@ -15,17 +16,50 @@ section {
     align-self: center;
     max-width: 100%;
     height: auto;
+    display: none;
+}
+.topImageProduct {
+    margin: 0;
+    padding: 0;
+    align-self: center;
+    width: 100%;
+    height: 45%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+/* webkit based transition from w3schools */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 3s;
+  animation-name: fade;
+  animation-duration: 3s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .6}
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .6}
+  to {opacity: 1}
 }
 .rule {
     width: 30%;
     margin: 25px auto 25px auto;
     clear: both;
 }
+.ruleProduct {
+    margin-left: 35%;
+    margin-right: 35%;
+    width: 30%;
+}
 .allGames {
     margin: 20px 5% 20px 5%;
 }
 .allGamesProduct {
-    margin: 20px 15% 20px 15%;
+    margin: 15px 15% 5px 15%;
 }
 .tableOfGames {
     padding: 10px 5% 10px 5%;
@@ -108,6 +142,7 @@ td {
     height: 310px;
     border: 1px solid #021a40;
     box-shadow: 10px 10px 4px #888888;
+    transform: translateY(-25%);
 }
 .gameImg img:hover {
     box-shadow: 7px 7px 4px #888888;
@@ -139,10 +174,22 @@ td {
     position: static;
     text-align: left;
     padding: 10px 0 10px 0;
-    margin-left: 15%;
-    width: 70%;
+    width: 30%;
     font-weight: bold;
     font-size: 35px;
+    letter-spacing: 3px;
+    margin-top: 0;
+    padding-top: 0;
+    display: inline-block;
+
+}
+.gameDescriptionProduct {
+    position: static;
+    text-align: left;
+    padding: 10px 0 10px 0;
+    margin-left: 25%;
+    width: 66%;
+    font-size: 20px;
 }
 .gamePrice {
     position: static;
@@ -150,6 +197,18 @@ td {
     text-align: right;
     font-weight: bold;
     font-size: 30px;
+}
+.gamePriceProduct {
+    position: static;
+    float: right;
+    padding: 10px 0 10px 0;
+    width: 10%;
+    font-size: 35px;
+    letter-spacing: 2px;
+    margin-right: 10%;
+    padding-top: 0;
+    font-style: italic;
+    display: inline-block;
 }
 .addToCart {
     position: static;
@@ -250,6 +309,36 @@ nav > ul > li a:active{
   text-decoration: underline;
 }
 .sortForm {
+  display: inline-block;
+  float: left;
+}
+.addedToCart {
+  margin-left: 30%;
+  text-align: right;
+}
+.inCart {
+  font-style: italic;
+  margin-bottom: 10px;
+}
+.addToCartProduct > a {
+  text-decoration: none;
+  color: gray;
+  font-style: italic;
+}
+.searchForm {
+  display: inline-block;
+  float: right;
+}
+.searchArea {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.searchRule {
   width: 15%;
-  margin-left: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  display: inline-block;
 }

@@ -8,6 +8,7 @@
     <title>CurtisGames.co.uk - Payment Form</title>
     <link rel="stylesheet" type="text/css" href="stylesheetPAYMENT.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="fonts/css/font-awesome.min.css">
     <script type="text/javascript">
         // Fields:
         // Card number, must be 16 digits
@@ -44,7 +45,7 @@
             var expYear = document.forms["form"]["expirationYear"].value;
             var name = document.forms["form"]["cardName"].value;
             var code = document.forms["form"]["cvc"].value;
-    
+
             if (count == 1) {
                 editText('', 'cN');
                 editText('', 'eM');
@@ -91,7 +92,46 @@
     </nav>
 
     <header>
-        <img src="img/mario.jpg" class="topImage"/>
+        <img src="img/franklin.jpg" class="topImage fade" />
+        <img src="img/mario.jpg" class="topImage fade"/>
+        <img src="img/fez.png" class="topImage fade"  />
+        <img src="img/minecraft.png" class="topImage fade" />
+        <img src="img/rl.jpg" class="topImage fade" />
+        <img src="img/wow.jpg" class="topImage fade" />
+        <img src="img/zelda.jpg" class="topImage fade" />
+        <img src="img/uncharted.jpg" class="topImage fade" />
+        <img src="img/fifa.jpg" class="topImage fade" />
+        <img src="img/r&c.jpg" class="topImage fade" />
+        <img src="img/ff15.jpg" class="topImage fade" />
+        <img src="img/hzd.jpg" class="topImage fade" />
+
+        <script>
+        // Automatic slideshow, learnt from https://www.w3schools.com/w3css/w3css_slideshow.asp. Thanks W3Schools ! :D
+
+        // set initial slideshow index, and get images
+        var slideIndex = 0;
+        slideshow();
+
+        function slideshow() {
+          var i;
+          // Get images from their class name
+          // iterate through images
+          var images = document.getElementsByClassName('topImage');
+
+          for (i = 0; i < images.length; i++) {
+            images[i].style.display = 'none';
+          }
+          slideIndex++;
+          // Once we have looped through all images, reset the number
+          if (slideIndex > images.length) {
+            slideIndex = 1
+          }
+          // display as block
+          images[slideIndex-1].style.display = 'block';
+          // change image every 4 seconds
+          setTimeout(slideshow, 10000);
+        }
+        </script>
     </header>
 
     <p class="enterDetails">

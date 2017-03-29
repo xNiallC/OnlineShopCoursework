@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <title>Curtis Games</title>
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="fonts/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head>
 
@@ -26,7 +27,46 @@
 </nav>
 
 <header>
-    <img src="img/mario.jpg" class="topImage"/>
+    <img src="img/franklin.jpg" class="topImage fade" />
+    <img src="img/mario.jpg" class="topImage fade"/>
+    <img src="img/fez.png" class="topImage fade"  />
+    <img src="img/minecraft.png" class="topImage fade" />
+    <img src="img/rl.jpg" class="topImage fade" />
+    <img src="img/wow.jpg" class="topImage fade" />
+    <img src="img/zelda.jpg" class="topImage fade" />
+    <img src="img/uncharted.jpg" class="topImage fade" />
+    <img src="img/fifa.jpg" class="topImage fade" />
+    <img src="img/r&c.jpg" class="topImage fade" />
+    <img src="img/ff15.jpg" class="topImage fade" />
+    <img src="img/hzd.jpg" class="topImage fade" />
+
+    <script>
+    // Automatic slideshow, learnt from https://www.w3schools.com/w3css/w3css_slideshow.asp. Thanks W3Schools ! :D
+
+    // set initial slideshow index, and get images
+    var slideIndex = 0;
+    slideshow();
+
+    function slideshow() {
+      var i;
+      // Get images from their class name
+      // iterate through images
+      var images = document.getElementsByClassName('topImage');
+
+      for (i = 0; i < images.length; i++) {
+        images[i].style.display = 'none';
+      }
+      slideIndex++;
+      // Once we have looped through all images, reset the number
+      if (slideIndex > images.length) {
+        slideIndex = 1
+      }
+      // display as block
+      images[slideIndex-1].style.display = 'block';
+      // change image every 4 seconds
+      setTimeout(slideshow, 10000);
+    }
+    </script>
 </header>
 
 <code>
@@ -63,6 +103,17 @@ if(isset($_GET['order'])) {
 }
 else {
   $gamesTable="SELECT * FROM Games";
+}
+
+if(isset($_GET['searchText'])) {
+  // get search query
+  $searchQuery = $_GET['searchText'];
+  // strip whitespace
+  $searchQuery = str_replace(' ','',$searchQuery);
+  // replace special characters
+  $searchQuery = preg_replace('/[^A-Za-z0-9\-]/', '', $searchQuery);
+  // run our query
+  $gamesTable="SELECT * FROM Games WHERE name LIKE '%$searchQuery%'";
 }
 // Open MySQL connection, get needed info
 
@@ -106,6 +157,7 @@ if(isset($_GET['action']) && $_GET['action'] == "add") {
 </code>
 
 <section id="Games" class="allGames">
+  <div class='searchArea'>
   <form method="get" action="index.php" class="sortForm">
     <select name="order">
       <option value="none" name="none">
@@ -126,11 +178,18 @@ if(isset($_GET['action']) && $_GET['action'] == "add") {
     </select>
     <input type="submit" value="Sort" />
   </form>
-<?php
-    if(isset($_GET['game'])) {
-      echo $_GET['game']." added to cart.";
-    }
-    ?>
+  <?php
+  if( isset($_GET['searchText'])) {
+    echo "You searched for: <b>".$_GET['searchText']."</b>";
+  }
+  else {
+  echo "<hr class='searchRule' />";
+  } ?>
+  <form method="get" action="index.php?" class="searchForm">
+    <input type='text' id='searchText' name='searchText' placeholder="Search by Game Name" />
+    <input type='submit' />
+  </form>
+  </div>
     <br />
     <?php
     $count = 0;
@@ -141,7 +200,7 @@ if(isset($_GET['action']) && $_GET['action'] == "add") {
 
         <!-- Each element from the database has its own div for styling -->
 
-        <div class="gameImg"><img src="<?php echo $row["image"] ?>" href="productpage.php?id=<?php echo $row['gameID'] ?>"></div>
+        <a class="gameImg" href="productpage.php?id=<?php echo $row['gameID'] ?>"><img src="<?php echo $row["image"] ?>"></a>
 
         <br/>
 
@@ -149,7 +208,7 @@ if(isset($_GET['action']) && $_GET['action'] == "add") {
 
         <div class="gamePrice">
           £<?php echo $row["price"] ?><br />
-          <a id="addItemToCartID" href="index.php?page=index&action=add&id=<?php echo $row['gameID'] ?>&game=<?php echo $row["name"] ?>" class="addToCartLink">- Add to cart -</a>
+          <a id="addItemToCartID" href="index.php?page=index&action=add&id=<?php echo $row['gameID'] ?>&game=<?php echo $row["name"] ?>" class="addToCartLink"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart</a>
         </div>
 
         <div class="game"><?php echo $row["description"] ?></div>
