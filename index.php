@@ -77,7 +77,7 @@
 
 $serverName="csmysql.cs.cf.ac.uk";
 $userName="c1623580";
-$password="Holiday01";
+$password="";
 $database="c1623580";
 
 $gamesTable = "HUGE MEMES";
